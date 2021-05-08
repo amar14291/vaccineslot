@@ -31,7 +31,7 @@ return(
      <br/>
 
      <Switch>
-         <Route exact path="/home" component={App} />
+         <Route exact path="/" component={App} />
          <Route exact path="/About" component={About} />
          <Route exact path="/Contact" component={Contact} />
          <Route exact path="/Profile" component={Profile} />
