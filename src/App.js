@@ -7,7 +7,7 @@ const axios = require('axios').default;
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { pinval : '',allcenter: [], idstate: '', iddistrict: '', idcheck: '', checkedtiffin: false, checkedwater: false, checkedpaper: false, checkedmilk: false, showsubmit: false, showInfo: false, posts: [], boxval: '', milk: '', isCheckedm: '', paper: '', tiffin: '', watercan: '', allcity: [], showsubmitpin: 'none', showsubmitdis: 'block' }
+    this.state = { pinval : '',allcenter: [], idstate: '', iddistrict: '', idcheck: '', checkedtiffin: false, checkedwater: false, checkedpaper: false, checkedmilk: false, showsubmit: false, showInfo: false, posts: [], boxval: '', milk: '', isCheckedm: '', paper: '', tiffin: '', watercan: '', allcity: [], showsubmitpin: 'none', showsubmitdis: 'block','sbycity':true,'sbypin': false,'fontcity': 'bold','fontpin': 'normal'}
   }
 
   deleteData = async (id) => {
@@ -122,37 +122,71 @@ class App extends Component {
   this.findcenter();
   }
 
-  searchbycheck = (e) => {
 
-    alert(e.target.text);
+    searchbycheck = async (type) => {
 
-  //   if(e.target.value=='pin')
-  // {
+    console.log(type);
+
+    if(type=='PIN')
+  {
+
+    this.setState((prevState, props) => ({
+      sbypin: true,
+    }));
+
+    this.setState((prevState, props) => ({
+      fontcity: 'normal',
+    }));
+
+    this.setState((prevState, props) => ({
+      fontpin: 'bold',
+    }));
+
+    this.setState((prevState, props) => ({
+      sbycity: false,
+    }));
 
 
-  //   this.setState((prevState, props) => ({
-  //     showsubmitpin: "block",
-  //   }));
+    this.setState((prevState, props) => ({
+      showsubmitpin: "block",
+    }));
 
-  //   this.setState((prevState, props) => ({
-  //     showsubmitdis: "none",
-  //   }));
-
-
-
-  // }
-  // else
-  // {
+    this.setState((prevState, props) => ({
+      showsubmitdis: "none",
+    }));
 
 
-  //   this.setState((prevState, props) => ({
-  //     showsubmitpin: "none",
-  //   }));
 
-  //   this.setState((prevState, props) => ({
-  //     showsubmitdis: "block",
-  //   }));
-  // }
+  }
+  else
+  {
+
+    this.setState((prevState, props) => ({
+      fontcity: 'bold',
+    }));
+
+    this.setState((prevState, props) => ({
+      fontpin: 'normal',
+    }));
+
+
+    this.setState((prevState, props) => ({
+      sbypin: false,
+    }));
+
+    this.setState((prevState, props) => ({
+      sbycity: true,
+    }));
+
+
+    this.setState((prevState, props) => ({
+      showsubmitpin: "none",
+    }));
+
+    this.setState((prevState, props) => ({
+      showsubmitdis: "block",
+    }));
+  }
 
 
   }
@@ -200,7 +234,7 @@ class App extends Component {
     ).catch(err => console.log(err));
   }
 
-  componentDidMount() {
+  componentDidMount(){
     this.fetchList();
   }
 
@@ -246,45 +280,22 @@ class App extends Component {
 
         <div className='row'>
 
-        <div className='form-group col-md-2'>
-        <label>Search by :  </label>
-        </div>
+          <div className='col-md-1'>
+          <label style={{"font-weight":this.state.fontcity}}
+           value="city">
+          <a value="city" onClick = {() =>  {this.searchbycheck('CITY')}}>City </a>
+          {(this.state.sbycity) ? <hr></hr> : '' }
+          </label></div>
 
         <div className='col-md-1'>
-        <label  ><label style={{"font-weight":"bold"}} onClick = {this.searchbycheck} value="city"> City </label></label>
-        <hr></hr>
+         <label  value="city"
+        style={{"font-weight":this.state.fontpin}}
+        >
+        <a value="city" onClick = {() =>  {this.searchbycheck('PIN')}}>Pin </a>
+        {(this.state.sbypin) ? <hr></hr> : '' }
+        </label>
         </div>
-
-        <div className='col-md-1'>
-        <label>Pin</label>
-        </div>
-
-        {/* <div className='form-group col-md-2'>
-        <label>Search by : </label>
-
-        <input  style={{ "width": "52%"}} checked="checked"  type="radio" onChange = {this.searchbycheck}  id="district" name="se" value="district"/>
-        </div>
-
-        <label for="district">District</label>
-
-
-        <div className='form-group col-md-1'>
-        <input type="radio"  onChange = {this.searchbycheck} id="pin" name="se" value="pin"/>
-        </div>
-        <label for="pin">Pin</label> */}
-
-
-
-
-{/* <ul class="nav nav-pills">
-
-  <li style={{"margin-left": "-190%;"}}><a href="#">City</a></li>   <label className='emplbl' ></label>  OR   <label className='emplbl' ></label>
-  <li><a href="#">Pin</a></li>
-
-</ul> */}
-
-
-         </div>
+    </div>
 
 
 <div style={{ display: this.state.showsubmitpin }} className='row'>
@@ -301,7 +312,7 @@ class App extends Component {
   </div>
 
  <div className='form-group col-md-3'>
-   <label className='emplbl' ></label>
+
   <button  onClick={this.findcenterbypin}  type="button" class="btn btn-outline-primary">Find by pin</button>
   </div>
 
@@ -344,8 +355,8 @@ class App extends Component {
          </div> */}
 
         <div className='form-group col-md-3'>
-          <label className='emplbl' ></label>
-         <button  onClick={this.findcenter}  type="button" class="btn btn-outline-primary">Find</button>
+
+         <button  onClick={this.findcenter}  type="button" class="btn btn-outline-primary">Find by city </button>
          </div>
 
          </div>
@@ -358,19 +369,19 @@ class App extends Component {
         <div className="bg-blue">
                 <div className="row px-1 py-1">
                 <div className="col-md-6">
-                <small >Copyright &copy; 2021. All rights reserved.</small>
+                <small >Copyright 2021. All rights reserved. @Amar Jain  7898123450</small>
                 </div>
                 <div className="col-md-6">
 
                <div className="text-right">
 
-                Developed by @
+
 
                 {/* <a href="https://www.linkedin.com/in/amar-jain-3b36603b/" target="_blank" >
                 <b>Amar Jain</b>
                 </a> */}
 
-              <a><b>Amar Jain - 7898123450</b></a>
+              {/* <a><b>@Amar Jain - 7898123450</b></a> */}
 
                  {/* <span class="fa fa-facebook mr-4 text-sm"></span>
                  <span class="fa fa-google-plus mr-4 text-sm"></span>

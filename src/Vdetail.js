@@ -10,6 +10,11 @@ function Vdetails(props) {
 
   const [fil, Setfil] = useState(0);
   const [filname, Setfilname] = useState(0);
+
+  const [colorall, Setcolorall] = useState('#007bff');
+  const [color18, Setcolor18] = useState('#007bff');
+  const [color45, Setcolor45] = useState('#007bff');
+
   //const [showsubmit, Setshowsubmit] = useState(0);
 
     const stIcon = {
@@ -21,18 +26,32 @@ function Vdetails(props) {
       // alert(filname);
       // alert(fil);
       // alert(e.target.value);
-       if(e.target.value=='18' || e.target.value=='45' )
+       if(e.target.value=='18')
        {
-        console.log('in age');
+         console.log('in age');
          Setfil(e.target.value);
          Setfilname('age');
+         Setcolor18('#000000');
+         Setcolor45('#007bff');
+         Setcolorall('#007bff');
 
+       } else if(e.target.value=='45' )
+       {
+        Setfil(e.target.value);
+        Setfilname('age');
+        Setcolor18('#007bff');
+        Setcolor45('#000000');
+        Setcolorall('#007bff');
        }
        else
        {
-         console.log('in fee');
-        Setfil(e.target.value);
-        Setfilname('fee');
+         console.log('');
+        Setfil(0);
+        Setfilname('all');
+
+        Setcolor18('#007bff');
+        Setcolor45('#007bff');
+        Setcolorall('#000000');
        }
   }
 
@@ -44,21 +63,23 @@ function Vdetails(props) {
 
     return (
          <div>
-        <h6> { (props.data.length) ? 'Status For : ' + corredate : ''  }</h6>
+
 
         { (props.data.length > 0 ) ? (
           <div>
-        {/* <div className="roundcl"></div>  */}
-         <div>Last update from CoWIN - 3 Minutes ago</div>
+
+         <div>Last update from CoWIN - <b>({corredate})</b></div>
+         {/* <div className="roundcl"></div> */}
         </div>) : (<div></div>) }
 
 
-        {/* <div style={{"display": "inline-block","text-align":"right"}}>
-        <button onClick={fillset}  type="button" class="btn btn-outline-primary" value="18">18+</button>
-        <button onClick={fillset} type="button" class="btn btn-outline-primary" value="45">45+</button>
-        <button onClick={fillset} type="button" class="btn btn-outline-primary" value="free">FREE</button>
-        <button onClick={fillset} type="button" class="btn btn-outline-primary" value="paid">PAID</button>
-        </div> */}
+         <div style={{"display": "inline-block","text-align":"right"}}>
+         <button onClick={fillset} style={{"border-color":colorall}}  type="button" class="btn btn-outline-primary" value="0">All</button>
+         &nbsp;
+         &nbsp;<button onClick={fillset} style={{"border-color":color18}} type="button" class="btn btn-outline-primary" value="18">18+</button>
+         &nbsp; <button onClick={fillset} style={{"border-color":color45}} type="button" class="btn btn-outline-primary" value="45">45+</button>
+
+        </div>
 
        <div className="table-responsive">
         <table class="table table-striped">
@@ -91,13 +112,14 @@ function Vdetails(props) {
 
     props.data.map((post, index) => (
 
-    //  ( (fil > 0 && post.min_age_limit==fil) ) ? (
+
+      ( (post.min_age_limit==fil) || (fil==0) )  ? (
     <tr>
 
       <td>{post.name}</td>
       <td style={{"textAlign":"center"}}>
        <b>{post.available_capacity}</b><br/>
-       <a href="https://selfregistration.cowin.gov.in/" target="_blank" color='#007bff'>Book Now</a>
+       <a style={{"color":"blue"}} href="https://selfregistration.cowin.gov.in/" target="_blank" color='#007bff'>Book Now</a>
       </td>
       {/* <td>{post.district_name}</td> */}
       {/* <td>{post.fee}</td> */}
@@ -114,7 +136,7 @@ function Vdetails(props) {
       <td>{post.to}</td>
 
     </tr>
-    //  ) : (<tr></tr>)
+     ) : (<tr></tr>)
 
 
   ))

@@ -25,9 +25,13 @@ return(
   <h3 style={{'margin-left':'18%'}} class="display-5" >
   <img src="https://i.imgur.com/CXQmsmF.png" class="logo"/>#Vaccination slot </h3>
 
+  {/* <span className="headr">• Last update from CoWIN - 3 Minutes ago</span> */}
+
 
      <div style={{"margin-top": "-23px;"}} class="container"><br/>
-      <Nav logout={handleLogout} />
+      {/* <Nav logout={handleLogout} /> */}
+         <App/>
+
      <br/>
 
      <Switch>

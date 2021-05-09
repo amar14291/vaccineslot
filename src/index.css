@@ -36,8 +36,16 @@ body {
 .logo {
   width: 188px;
   height: 75px;
-  margin-top: 20px;
-  margin-left: 35px
+
+}
+
+.headr {
+  font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 0px;
+    display: block;
+    max-width: 30ch;
+    text-align: center;
 }
 
 .image {
