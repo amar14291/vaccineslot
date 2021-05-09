@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/vaccineslot/static/css/main.2f3e5e3f.chunk.css",
-    "main.js": "/vaccineslot/static/js/main.8f1b38c0.chunk.js",
-    "main.js.map": "/vaccineslot/static/js/main.8f1b38c0.chunk.js.map",
+    "main.js": "/vaccineslot/static/js/main.884bc76a.chunk.js",
+    "main.js.map": "/vaccineslot/static/js/main.884bc76a.chunk.js.map",
     "runtime-main.js": "/vaccineslot/static/js/runtime-main.bfdc868d.js",
     "runtime-main.js.map": "/vaccineslot/static/js/runtime-main.bfdc868d.js.map",
     "static/css/2.62413024.chunk.css": "/vaccineslot/static/css/2.62413024.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.62413024.chunk.css",
     "static/js/2.1130617e.chunk.js",
     "static/css/main.2f3e5e3f.chunk.css",
-    "static/js/main.8f1b38c0.chunk.js"
+    "static/js/main.884bc76a.chunk.js"
   ]
 }
